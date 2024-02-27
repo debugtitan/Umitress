@@ -1,0 +1,70 @@
+{% extends "account/lognav.html" %}
+   
+
+{% block content %}
+    
+          <script src="https://js.paystack.co/v1/inline.js"></script>
+
+                <div class="flex flex-col space-y-10 mt-3">
+              <h4 class="text-center pt-5 font-extrabold text-2xl">Are you sure you want to proceed?</h4>
+                <div class="flex justify-between">
+                    <h6 class="text-xl text-base font-extrabold">Total</h6>
+                    <p class="text-xl text-base">&#8358; {{order.get_cart_total}}</p>
+                </div>
+                  <button onclick="payWithPaystack()"  class="bg-gray-100 p-3 rounded-lg hover:opacity-70 font-base text-xl">Pay</button>
+                       <a href="{% url 'store:cart'%}" class="p-3 bg-gray-200 rounded-lg hover:opacity-70 font-base text-xl text-center">Cancel</a>
+                </div>
+
+
+       <!-- <script>
+        function payWithPaystack(){
+          let currency = "NGN";
+          let plan = "";
+          let ref = "{{order.ref}}";
+          let amount = "{{order.get_cart_total}}";
+          let obj = {
+            key : "{{paystack_key}}",
+            email : "{{order.getCustomerEmail}}",
+            amount : "{{order.amount_value}}",
+            ref : ref,
+            callback: function (response) {
+              window.location.href = "{% url 'store:verify-payment' order.ref %}"
+            },
+          };
+          if (Boolean(currency)){
+            obj.currency = currency.toUpperCase();
+          }
+          if (Boolean(plan)){
+            obj.plan - plan
+          }
+          
+          var handler = paystackPop.setup(obj);
+          handler.openIframe();
+
+        }
+       </script> -->
+     <script>
+
+function payWithPaystack() {
+  var handler = PaystackPop.setup({
+    key: '{{paystack_key}}', // Replace with your public key
+    email: "{{order.getCustomerEmail}}",
+    amount:  "{{order.get_cart_total}}" * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
+    currency: 'NGN', // Use GHS for Ghana Cedis or USD for US Dollars
+    ref: '{{order.ref}}', // Replace with a reference you generated
+    callback: function(response) {
+      //this happens after the payment is completed successfully
+      var reference = response.reference;
+      alert('Payment complete! Reference: ' + reference);
+      window.location.href = "{% url 'store:verify-payment' order.ref %}"
+      
+    },
+    onClose: function() {
+      alert('Transaction was not completed, window closed.');
+    },
+  });
+  handler.openIframe();
+}
+</script>
+  
+{% endblock content %}

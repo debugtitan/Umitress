@@ -1,0 +1,103 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+
+		<!-- Bootstrap CSS -->
+		<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+		<link href="{% static 'tiny-slider.css' %}" rel="stylesheet">
+		<link href="{% static 'style.css' %}" rel="stylesheet">
+		<title>Umitrees</title>
+	</head>
+
+	<body>
+
+		
+
+{% block content %}
+
+
+{% endblock content %}
+
+
+
+        <!-- Start Footer Section -->
+		<footer class="footer-section">
+			<div class="container relative">
+
+				<div class="sofa-img">
+					<img src="{% static 'images/couch.png' %}" alt="Image" class="img-fluid">
+				</div>
+
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="subscription-form">
+							<h3 class="d-flex align-items-center"><span class="me-1">UmitreesNG</span><span></span></h3>
+
+						</div>
+					</div>
+				</div>
+
+
+				<div class="border-top copyright">
+					<div class="row pt-4">
+						<div class="col-lg-6">
+							<p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="">Olajide</a> <!-- License information: https://untree.co/license/ -->
+            </p>
+						</div>
+
+						<div class="col-lg-6 text-center text-lg-end">
+							<ul class="list-unstyled d-inline-flex ms-auto">
+								<li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</footer>
+		<!-- End Footer Section -->	
+
+
+		<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'js/tiny-slider.js' %}"></script>
+		<script src="{% static 'js/custom.js' %}"></script>
+		<script src="{% static 'js/cart.js' %}"></script>
+		
+		<script type="text/javascript">
+			var user = '{{request.user}}'
+			{% comment %} CSRF TOKEN {% endcomment %}
+			function getToken(name){
+				var cookievalue = null
+				if (document.cookie && document.cookie !==''){
+				var cookies = document.cookie.split(';');
+				for (var i = 0; i < cookies.length; i++){
+					var cookie = cookies[i].trim();
+					// if cookie begin with the name we want 
+					if(cookie.substring(0, name.length + 1) === (name + '=')){
+						cookievalue = decodeURIComponent(cookie.substring(name.length + 1));
+						break;
+					}
+				}
+			}
+			return cookievalue;
+			}
+			var csrftoken = getToken('csrftoken')
+		</script>
+
+		
+		
+	</body>
+
+</html>

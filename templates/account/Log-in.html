@@ -1,0 +1,45 @@
+{% extends "account/lognav.html" %}
+   
+
+{% block content %}
+    
+          
+            <form action="" class="main-content-form" method="post">
+                {% csrf_token %}
+                <div class="flex flex-col space-y-10 mt-3">
+                <input type="email" name="email" id="" placeholder="Email address" class="p-5 bg-gray-200 rounded-sm focus:outline-none focus:ring focus:border-blue-200 ">
+                
+                <div class="bg-gray-200 rounded-sm ">
+                <input  type="password" name="password" placeholder="Password" class="p-5 w-11/12 bg-gray-200 rounded-sm focus:outline-none focus:ring focus:border-blue-200" id="password-el"> <span class="cursor-pointer" id="toggle"  onclick="visibilityToggle()"><i class="fa-solid fa-eye-slash text-gray-500"></i> </span>
+                </div>
+
+                  <input type="submit"  value="Log In" class="white-link p-3 rounded-lg hover:opacity-25 font-base text-xl">
+                </div>
+              
+            </form>
+                     <div class="forgot-password mt-5 text-blue-300">
+              
+                <a href="#" >Forgot password ?</a>
+            </div>
+  
+            <p class="signup-text mt-5 text-center">Don't have an account? <a href="{% url 'account:sign-up'%}"><span class="text-blue-300">Sign up for free</span></a></p>
+        </div>
+    </div>
+
+    <script>    
+        const passwordEl = document.querySelector("#password-el")
+        const toggleEl = document.querySelector("#toggle")
+
+        function visibilityToggle(){
+            if (passwordEl.type === 'password'){
+                passwordEl.type = 'text'
+                toggleEl.innerHTML = `<i class="fa-solid fa-eye text-gray-500"></i>`
+            }else{
+                passwordEl.type = 'password'
+                 toggleEl.innerHTML = `<i class="fa-solid fa-eye-slash text-gray-500"></i>`
+            }
+        }
+     
+    </script>
+  
+{% endblock content %}

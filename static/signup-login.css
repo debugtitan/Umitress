@@ -1,0 +1,134 @@
+    html {
+    box-sizing: border-box;
+    }
+
+    * {
+    box-sizing: inherit;
+    font-family: 'Open Sans', sans-serif;
+    }
+
+    body {
+    margin: 0;
+    padding: 0;
+    background-color: #F9F5F6;
+    }
+
+    .container {
+    color: black;
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: auto;
+    max-width: 350px;
+    }
+
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    button a {
+        cursor: pointer;
+    }
+
+    a:visited {
+        color: black;
+    }
+
+    /* Main Content */
+    .main-content {
+        display: flex;
+        flex-flow: row wrap;
+        padding: 3%;
+        font-weight: bold;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo {
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: black;
+        width: 100%;
+    }
+
+    span {
+    font-weight: normal;
+    }
+
+    h2 {
+        width: 100%;
+        margin-bottom: 0;
+        font-size: 2em;
+    }
+
+    .main-content-text {
+        font-size: 0.9rem;
+        margin-top: 5px;
+        width: 100%;
+        color: #555555d9;
+        font-weight: 600;
+    }
+
+    .main-content input {
+        width: 100%;
+        margin: 17px 0;
+        border-style: none;
+        border: 1px solid black;
+        padding: 10px 5px;
+        background-color: #F9F5F6;
+        color: black;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+
+    .main-content-form {
+        width: 100%;
+    }
+
+    button {
+    background-color: white;
+    border-radius: 20px;
+    padding: 8px 20px;
+    color: black;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    }
+
+    .main-content button {
+        width: 100%;
+        margin: 5px auto;
+    }
+
+    .create-account {
+        color: white;
+        background-color: black;
+        padding: 10.5px;
+    }
+
+    .signupwithgoogle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    a.white-link:visited {
+        color: white;
+    }
+
+    button img {
+        height: 23px;
+        margin-right: 5px;
+    }
+
+    .login-text {
+        margin: 0 auto 20px;
+        font-weight: normal;
+        font-size: 0.9rem;
+    }
+
+    .login-text a {
+        color: #D5B4B4;
+    }

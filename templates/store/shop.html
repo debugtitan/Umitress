@@ -1,0 +1,85 @@
+
+{% extends 'base.html' %}		
+{% load static %}
+{% block title %}
+{% if category %} {{category.name}}{% else %}Products {% endif %}
+{% endblock title %}
+{% block content %}
+
+ <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+
+			<div class="container">
+				<a class="navbar-brand" href="{% url 'store:store' %}">Umitrees<span>.</span></a>
+
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarsFurni">
+					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+						
+						
+						<li><a class="nav-link" href="{% url 'store:store' %}">All</a></li>
+						{% for items  in categories  %}
+						<li><a class="nav-link" href="{{items.get_absolute_url}}">{{items.name}}</a></li>
+						{% endfor %}
+					</ul>
+
+			<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+				
+				{% if user.is_authenticated %}
+					<li><a class="nav-link" href="{% url 'account:log-out' %}"><img src="{% static 'images/user.svg' %}"></a></li>
+					{% else %}
+					<li><a class="nav-link" href="{% url 'account:login' %}"><img src="{% static 'images/user.svg' %}"></a></li>
+				{% endif %}
+<!-- 					
+			<li><a class="nav-link" href="{% url 'account:login' %}"><img src="{% static 'images/user.svg' %}"></a></li> -->
+			<li><a class="nav-link" href="{% url 'store:cart' %}"><img src="{% static 'images/cart.svg' %}"></a></li>
+			<span class="text-white text-center bg-secondary" style="height: 25px; width:15px; border-radius:100px; ">{{cartItems}}</span>
+		
+		</ul> 
+				
+
+				</div>
+			</div>
+				 
+		</nav>
+		
+	
+
+		<div class="untree_co-section product-section before-footer-section">
+		    <div class="container">
+		      	<div class="row">
+
+					{% for product in products  %}
+		      		<!-- Start Column 1 -->
+					<div class="col-12 col-md-4 col-lg-3 mb-5">
+						<span class="product-item">
+							<img src="{{product.image.url}}" class="img-fluid product-thumbnail">
+							<h3 class="product-title">{{product.name}}</h3>
+							<strong class="product-price">NGN {{product.price}}</strong>
+							
+							{% if user.is_authenticated %}
+								<span data-product={{product.id}} data-action="add" class="icon-cross add-btn update-cart">
+								<img src="{%static 'images/cross.svg' %}" class="img-fluid">
+							</span>
+							{% else %}
+							<span onclick="alert('You need to login in first!')" data-product={{product.id}} data-action="add" class="icon-cross add-btn update-cart">
+								<img src="{%static 'images/cross.svg' %}" class="img-fluid">
+							</span>
+							{% endif %}
+								
+							
+							
+						</span>
+					</div> 
+					<!-- End Column 1 -->
+					{% endfor %}
+
+		      	</div>
+		    </div>
+		</div>
+
+{% endblock content %}
+
+		
