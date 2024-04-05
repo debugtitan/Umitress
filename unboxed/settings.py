@@ -1,17 +1,20 @@
-
-
 import os
 from pathlib import Path
+
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Env
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR,'.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wifbcb991$%i5fmui(_fcv&)a#+a5xr+pb@45-%(*+t#cbmj&!'
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,6 +34,9 @@ INSTALLED_APPS = [
     'accounts',
     'store',
     'Order',
+    'cloudinary',
+    'cloudinary_storage',
+    'whitenoise',
 
 ]
 
@@ -38,6 +44,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -71,12 +78,27 @@ WSGI_APPLICATION = 'unboxed.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'default': {
+            'ENGINE':'django.db.backends.postgresql',
+            'NAME': env.str('DATABASE_NAME'),
+            'USER': env.str('DATABASE_USER'),
+            'PASSWORD': env.str('DATABASE_PASSWORD'),
+            'HOST': env.str('DATABASE_HOST'),
+            'PORT': env.int('DATABASE_PORT'),
+        }
     }
-}
+
+
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -116,15 +138,23 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [BASE_DIR/ 'static']
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles_build', 'static')
 
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
+# PAYSTACK CONFIGURATION
 
-PAYSTACK_PRIVATE_KEY = 'sk_test_5d306740a647b60ac247a02f9d8de229aad1b74c'
-PAYSTACK_PUBLIC_KEY = 'pk_test_dfe4d8c1a9843698f8488968b52e662a03a0a3ab'
+PAYSTACK_PRIVATE_KEY = env.str('PAYSTACK_PRIVATE_KEY')
+PAYSTACK_PUBLIC_KEY = env.str('PAYSTACK_PUBLIC_KEY')
 
+# CLOUDINARY CONFIGURATION
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env.str('CLOUD_NAME'),
+    'API_KEY':  env.str('CLOUD_KEY'),
+    'API_SECRET': env.str('CLOUD_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
