@@ -7,14 +7,19 @@
             <form action="" class="main-content-form" method="post">
                 {% csrf_token %}
                 <div class="flex flex-col space-y-10 mt-3">
-                <input type="email" name="email" id="" placeholder="Email address" class="p-5 bg-gray-200 rounded-sm focus:outline-none focus:ring focus:border-blue-200 ">
+                <!-- <input type="email" name="email" id="" placeholder="Email address" class="p-5 bg-gray-200 rounded-sm outline-none font-san text-base font-semibold"> -->
+                {{form.email}}
 
                       <div class="bg-gray-200 rounded-sm ">
-                <input  type="password" name="password" placeholder="Password" class="p-5 w-11/12 bg-gray-200 rounded-sm focus:outline-none focus:ring focus:border-blue-200" id="password-el"> <span class="cursor-pointer" id="toggle"  onclick="visibilityToggle()"><i class="fa-solid fa-eye-slash text-gray-500"></i> </span></div>
+                <!-- <input  type="password" name="password" placeholder="Password" class="p-5 w-11/12 bg-gray-200 rounded-sm  outline-none font-san text-base font-semibold" id="password-el">  -->
+                {{form.password1}}
+                <span class="cursor-pointer" id="toggle"  onclick="visibilityToggle()"><i class="fa-solid fa-eye-slash text-gray-500"></i> </span></div>
 
 
                <div class="bg-gray-200 rounded-sm ">
-                <input  type="password" name="password" placeholder="Confirm password" class="p-5 w-11/12 bg-gray-200 rounded-sm focus:outline-none focus:ring focus:border-blue-200"id="password-El"> <span class="cursor-pointer" id="toggle-el"  onclick="visibilityToggle2()"><i class="fa-solid fa-eye-slash text-gray-500"></i> </span>
+                <!-- <input  type="password" name="password" placeholder="Confirm password" class="p-5 w-11/12 bg-gray-200 rounded-sm outline-none font-san text-base font-semibold"id="password-El">  -->
+                {{form.password2}}
+                <span class="cursor-pointer" id="toggle-el"  onclick="visibilityToggle2()"><i class="fa-solid fa-eye-slash text-gray-500"></i> </span>
                 </div>
 
 

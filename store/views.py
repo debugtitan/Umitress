@@ -67,6 +67,7 @@ def checkout(request):
         order, created = Order.objects.get_or_create(customer=customer, verified=False)
         items = order.order_items.all()
         
+        
     else:
         items = []
         order = {'get_cart_total':0, 'count_cart':0}
@@ -95,8 +96,10 @@ def updateItem(request):
     customer = request.user
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer, verified=False)
+    # order = Order.objects.create(customer=customer, verified=False)
 
     orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+    # orderItem = OrderItem.objects.create(order=order, product=product)
 
     if action == 'add':
         orderItem.quantity = orderItem.quantity + 1
@@ -110,17 +113,3 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False) 
 
-def verify_payment(request, ref):
-    payment = Order.objects.get(ref=ref)
-    verified = payment.verify_payment()
-    print("ref Number: ",ref)
-    
-    if verified:
-     
-        customer = request.user
-        order, created = Order.objects.get_or_create(customer=customer, verified=True)
-        items = order.delete()
-        order = {'get_cart_total':0, 'count_cart':0}
-        return render(request, 'cart/thankyou.html')
-    
-    return render(request, 'cart/thankyou.html')

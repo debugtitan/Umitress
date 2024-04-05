@@ -9,6 +9,6 @@ urlpatterns = [
     path('cart', views.cart, name='cart'),
     path('checkout', views.checkout, name='checkout'),
     path('updateItem', views.updateItem, name='update_item'),
-    path('<str:ref>/', views.verify_payment, name='verify-payment' )
+
 
 ]

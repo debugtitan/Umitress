@@ -9,9 +9,10 @@
                 <div class="flex flex-col space-y-10 mt-3">
                 <input type="email" name="email" id="" placeholder="Email address" class="p-5 bg-gray-200 rounded-sm focus:outline-none focus:ring focus:border-blue-200 ">
                 
-                <div class="bg-gray-200 rounded-sm ">
-                <input  type="password" name="password" placeholder="Password" class="p-5 w-11/12 bg-gray-200 rounded-sm focus:outline-none focus:ring focus:border-blue-200" id="password-el"> <span class="cursor-pointer" id="toggle"  onclick="visibilityToggle()"><i class="fa-solid fa-eye-slash text-gray-500"></i> </span>
-                </div>
+              
+                <input  type="password" name="password" placeholder="Password" class="p-5 bg-gray-200 rounded-sm focus:outline-none focus:ring focus:border-blue-200" id="password-el"> 
+            
+                <span class="cursor-pointer  w-20 mb-2 text-base font-bold" id="toggle"  onclick="visibilityToggle()"><i class="fa-solid fa-eye-slash text-gray-500 "></i> Show</span>
 
                   <input type="submit"  value="Log In" class="white-link p-3 rounded-lg hover:opacity-25 font-base text-xl">
                 </div>
@@ -33,10 +34,10 @@
         function visibilityToggle(){
             if (passwordEl.type === 'password'){
                 passwordEl.type = 'text'
-                toggleEl.innerHTML = `<i class="fa-solid fa-eye text-gray-500"></i>`
+                toggleEl.innerHTML = `<i class="fa-solid fa-eye text-gray-500"> </i> Hide`
             }else{
                 passwordEl.type = 'password'
-                 toggleEl.innerHTML = `<i class="fa-solid fa-eye-slash text-gray-500"></i>`
+                 toggleEl.innerHTML = `<i class="fa-solid fa-eye-slash text-gray-500"></i> Show`
             }
         }
      

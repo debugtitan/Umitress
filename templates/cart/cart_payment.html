@@ -16,33 +16,7 @@
                 </div>
 
 
-       <!-- <script>
-        function payWithPaystack(){
-          let currency = "NGN";
-          let plan = "";
-          let ref = "{{order.ref}}";
-          let amount = "{{order.get_cart_total}}";
-          let obj = {
-            key : "{{paystack_key}}",
-            email : "{{order.getCustomerEmail}}",
-            amount : "{{order.amount_value}}",
-            ref : ref,
-            callback: function (response) {
-              window.location.href = "{% url 'store:verify-payment' order.ref %}"
-            },
-          };
-          if (Boolean(currency)){
-            obj.currency = currency.toUpperCase();
-          }
-          if (Boolean(plan)){
-            obj.plan - plan
-          }
-          
-          var handler = paystackPop.setup(obj);
-          handler.openIframe();
-
-        }
-       </script> -->
+  
      <script>
 
 function payWithPaystack() {
@@ -56,7 +30,9 @@ function payWithPaystack() {
       //this happens after the payment is completed successfully
       var reference = response.reference;
       alert('Payment complete! Reference: ' + reference);
-      window.location.href = "{% url 'store:verify-payment' order.ref %}"
+      window.location.href = "{% url 'order:verify-pay' order.ref %}"
+      url = "{% url 'order:verify-pay' order.ref %}"
+      console.log(url)
       
     },
     onClose: function() {

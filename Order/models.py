@@ -4,7 +4,7 @@ from accounts.models import CustomUser
 from store.models import Product
 from .paystack import PayStack
 
-# Create your models here.
+
 
 class Order(models.Model):
     customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -18,13 +18,13 @@ class Order(models.Model):
             object_with_similar_ref = Order.objects.filter(ref=ref)
             if not object_with_similar_ref:
                 self.ref = ref
+   
         super().save(*args, **kwargs)
         
     @property
     def amount_value(self):
         return int(self.get_cart_total) * 100
-    
-    @property
+
     def verify_payment(self):
         amount = int(self.get_cart_total)
         paystack = PayStack()
@@ -32,7 +32,7 @@ class Order(models.Model):
         if status:
             if result['amount'] / 100 == amount:
                 self.verified = True
-            self.save()
+                self.save()
         if self.verified:
             return True
         return False
