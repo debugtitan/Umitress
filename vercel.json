@@ -1,23 +1,19 @@
+
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "unboxed/wsgi.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "15mb",
-        "runtime": "python3.9"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "unboxed/wsgi.py"
-    }
-  ]
+    "builds": [
+        {
+            "src": "unboxed/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "100mb",
+                "runtime": "python3.9"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "unboxed/wsgi.py"
+        }
+    ]
 }
